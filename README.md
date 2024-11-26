@@ -26,5 +26,6 @@ sdb-backend
       └─ resources
          ├─ application.yaml
          └─ logback.xml
+         |--firebase-service-account.json
 
 ```
