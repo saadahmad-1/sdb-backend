@@ -1,0 +1,8 @@
+2024-11-26 15:25:41.986 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-11-26 15:25:42.117 [main] INFO  Application - Firebase initialized successfully
+2024-11-26 15:25:42.169 [main] INFO  Application - Application started in 0.335 seconds.
+2024-11-26 15:25:42.170 [main] INFO  Application - Application started: io.ktor.server.application.Application@2873d672
+2024-11-26 15:25:42.296 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-11-26 15:25:52.753 [eventLoopGroupProxy-4-1] INFO  Application - [31m404 Not Found[m: [36mGET[m - / in 1498ms
+2024-11-26 15:26:14.475 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@2873d672
+2024-11-26 15:26:14.477 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@2873d672
