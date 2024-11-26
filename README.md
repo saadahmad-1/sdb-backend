@@ -7,8 +7,6 @@ This repository contains the backend for the Smart Delivery Box application. The
 - [Prerequisites](#prerequisites)
 - [Setup Instructions](#setup-instructions)
 - [Build and Run](#build-and-run)
-- [API Endpoints](#api-endpoints)
-- [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
 
 ## Prerequisites
