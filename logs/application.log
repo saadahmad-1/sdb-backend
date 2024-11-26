@@ -261,3 +261,5 @@ java.lang.RuntimeException: Could not deserialize object. Class com.example.Fire
 2024-11-26 21:32:24.171 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/delivery/status in 344ms
 2024-11-26 21:32:31.846 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/delivery/status in 352ms
 2024-11-26 21:32:35.549 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mGET[m - /api/v1/delivery/status/PARCEL_123 in 309ms
+2024-11-26 21:33:20.261 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@72503b19
+2024-11-26 21:33:20.262 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@72503b19
