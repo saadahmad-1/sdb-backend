@@ -1,5 +1,6 @@
 package com.example
 
+import com.google.cloud.firestore.Firestore
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -13,6 +14,7 @@ data class DeliveryStatusRequest(
     val parcelId: String,
     val status: DeliveryStage,
     val location: String,
+    val serviceProviderId: String,
     val timestamp: Long = System.currentTimeMillis(),
     val additionalDetails: String? = null
 )
@@ -30,48 +32,19 @@ enum class DeliveryStage {
 @Serializable
 data class DeliveryStatusResponse(
     val parcelId: String,
-    val currentStatus: DeliveryStage,
-    val statusHistory: List<DeliveryStatusLog>,
     val status: String,
     val message: String
 )
 
 @Serializable
-data class DeliveryStatusLog(
-    val stage: DeliveryStage,
-    val location: String,
-    val timestamp: Long,
+data class FirestoreDeliveryStatusData(
+    val parcelId: String = "",
+    val status: DeliveryStage = DeliveryStage.DISPATCHED,
+    val location: String = "",
+    val serviceProviderId: String = "",
+    val timestamp: Long = System.currentTimeMillis(),
     val additionalDetails: String? = null
 )
-
-object DeliveryTracker {
-    private val deliveryStatusMap = mutableMapOf<String, MutableList<DeliveryStatusLog>>()
-
-    fun updateDeliveryStatus(request: DeliveryStatusRequest): Boolean {
-        val statusLog = DeliveryStatusLog(
-            stage = request.status,
-            location = request.location,
-            timestamp = request.timestamp,
-            additionalDetails = request.additionalDetails
-        )
-        
-        deliveryStatusMap.getOrPut(request.parcelId) { mutableListOf() }.add(statusLog)
-        return true
-    }
-
-    fun getDeliveryStatus(parcelId: String): DeliveryStatusResponse? {
-        val statusHistory = deliveryStatusMap[parcelId]
-        return statusHistory?.let {
-            DeliveryStatusResponse(
-                parcelId = parcelId,
-                currentStatus = it.last().stage,
-                statusHistory = it,
-                status = "SUCCESS",
-                message = "Delivery status retrieved successfully"
-            )
-        }
-    }
-}
 
 fun Application.configureDeliveryStatusRouting() {
     routing {
@@ -82,9 +55,7 @@ fun Application.configureDeliveryStatusRouting() {
                         call.respond(
                             HttpStatusCode.BadRequest,
                             DeliveryStatusResponse(
-                                parcelId = "UNKNOWN",
-                                currentStatus = DeliveryStage.DISPATCHED,
-                                statusHistory = emptyList(),
+                                parcelId = UUID.randomUUID().toString(),
                                 status = "FAILED",
                                 message = "Invalid request body"
                             )
@@ -97,56 +68,47 @@ fun Application.configureDeliveryStatusRouting() {
                             HttpStatusCode.BadRequest,
                             DeliveryStatusResponse(
                                 parcelId = request.parcelId,
-                                currentStatus = request.status,
-                                statusHistory = emptyList(),
                                 status = "FAILED",
                                 message = "Invalid parcel ID"
                             )
                         )
                         return@post
                     }
-
-                    val updateResult = DeliveryTracker.updateDeliveryStatus(request)
                     
-                    if (updateResult) {
-                        call.respond(
-                            HttpStatusCode.OK,
-                            DeliveryStatusResponse(
-                                parcelId = request.parcelId,
-                                currentStatus = request.status,
-                                statusHistory = listOf(
-                                    DeliveryStatusLog(
-                                        stage = request.status,
-                                        location = request.location,
-                                        timestamp = request.timestamp,
-                                        additionalDetails = request.additionalDetails
-                                    )
-                                ),
-                                status = "SUCCESS",
-                                message = "Delivery status updated successfully"
-                            )
+                    val firestore = FirestoreClient.getFirestore()
+                    
+                    // Store Delivery Status in Firestore
+                    val firestoreDeliveryStatusData = FirestoreDeliveryStatusData(
+                        parcelId = request.parcelId,
+                        status = request.status,
+                        location = request.location,
+                        serviceProviderId = request.serviceProviderId,
+                        timestamp = request.timestamp,
+                        additionalDetails = request.additionalDetails
+                    )
+                    
+                    firestore.collection("delivery_statuses")
+                        .document(request.parcelId)
+                        .set(firestoreDeliveryStatusData)
+                        .get() // Wait for the operation to complete
+                    
+                    call.respond(
+                        HttpStatusCode.OK,
+                        DeliveryStatusResponse(
+                            parcelId = request.parcelId,
+                            status = "SUCCESS",
+                            message = "Delivery status updated successfully"
                         )
-                    } else {
-                        call.respond(
-                            HttpStatusCode.InternalServerError,
-                            DeliveryStatusResponse(
-                                parcelId = request.parcelId,
-                                currentStatus = request.status,
-                                statusHistory = emptyList(),
-                                status = "FAILED",
-                                message = "Failed to update delivery status"
-                            )
-                        )
-                    }
+                    )
                 } catch (e: Exception) {
+                    val errorId = UUID.randomUUID().toString()
+                    
                     call.respond(
                         HttpStatusCode.InternalServerError,
                         DeliveryStatusResponse(
-                            parcelId = "UNKNOWN",
-                            currentStatus = DeliveryStage.DISPATCHED,
-                            statusHistory = emptyList(),
+                            parcelId = errorId,
                             status = "FAILED",
-                            message = "Error updating delivery status: ${e.message}"
+                            message = "Failed to update delivery status: ${e.message}"
                         )
                     )
                 }
@@ -157,29 +119,61 @@ fun Application.configureDeliveryStatusRouting() {
                     call.respond(
                         HttpStatusCode.BadRequest,
                         DeliveryStatusResponse(
-                            parcelId = "UNKNOWN",
-                            currentStatus = DeliveryStage.DISPATCHED,
-                            statusHistory = emptyList(),
+                            parcelId = UUID.randomUUID().toString(),
                             status = "FAILED",
                             message = "Parcel ID is required"
                         )
                     )
                     return@get
                 }
-
-                val deliveryStatus = DeliveryTracker.getDeliveryStatus(parcelId)
-                
-                if (deliveryStatus != null) {
-                    call.respond(HttpStatusCode.OK, deliveryStatus)
-                } else {
+            
+                try {
+                    val firestore = FirestoreClient.getFirestore()
+                    val docRef = firestore.collection("delivery_statuses").document(parcelId)
+                    val snapshot = docRef.get().get()
+            
+                    if (snapshot.exists()) {
+                        val deliveryStatus = snapshot.toObject(FirestoreDeliveryStatusData::class.java)
+                        
+                        // Check if the delivery status data is not null
+                        if (deliveryStatus != null) {
+                            call.respond(
+                                HttpStatusCode.OK,
+                                DeliveryStatusResponse(
+                                    parcelId = parcelId,
+                                    status = deliveryStatus.status.name, // Get the status from the Firestore data
+                                    message = "Delivery status retrieved successfully"
+                                )
+                            )
+                        } else {
+                            call.respond(
+                                HttpStatusCode.NotFound,
+                                DeliveryStatusResponse(
+                                    parcelId = parcelId,
+                                    status = "FAILED",
+                                    message = "Parcel status not found"
+                                )
+                            )
+                        }
+                    } else {
+                        call.respond(
+                            HttpStatusCode.NotFound,
+                            DeliveryStatusResponse(
+                                parcelId = parcelId,
+                                status = "FAILED",
+                                message = "Parcel status not found"
+                            )
+                        )
+                    }
+                } catch (e: Exception) {
+                    val errorId = UUID.randomUUID().toString()
+            
                     call.respond(
-                        HttpStatusCode.NotFound,
+                        HttpStatusCode.InternalServerError,
                         DeliveryStatusResponse(
-                            parcelId = parcelId,
-                            currentStatus = DeliveryStage.DISPATCHED,
-                            statusHistory = emptyList(),
+                            parcelId = errorId,
                             status = "FAILED",
-                            message = "Parcel status not found"
+                            message = "Failed to retrieve delivery status: ${e.message}"
                         )
                     )
                 }
