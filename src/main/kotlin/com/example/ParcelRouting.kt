@@ -11,10 +11,10 @@ import java.util.UUID
 // Firestore Parcel Data Class for Storage
 @Serializable
 data class FirestoreParcelData(
-    val parcelId: String,
-    val size: ParcelSize,
-    val destination: String,
-    val isFragile: Boolean,
+    val parcelId: String = "",
+    val size: ParcelSize = ParcelSize.SMALL,
+    val destination: String = "",
+    val isFragile: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
     val status: String = "CREATED"
 )
@@ -23,6 +23,14 @@ data class FirestoreParcelData(
 enum class ParcelSize {
     SMALL, MEDIUM, LARGE
 }
+
+// New Response Data Class for Parcel List
+@Serializable
+data class ParcelListResponse(
+    val status: String,
+    val message: String,
+    val parcels: List<FirestoreParcelData>
+)
 
 fun Application.configureParcelRouting() {
     routing {
@@ -108,6 +116,44 @@ fun Application.configureParcelRouting() {
                     )
                 }
             }
+
+            get("get-parcels") {
+                try {
+                    val firestore = FirestoreClient.getFirestore()
+                    val parcelsSnapshot = firestore.collection("parcels")
+                        .get()
+                        .get() // Wait for the operation to complete
+
+                    val parcels = parcelsSnapshot.documents.mapNotNull { document ->
+                        document.toObject(FirestoreParcelData::class.java)
+                    }
+
+                    call.respond(
+                        HttpStatusCode.OK,
+                        ParcelListResponse(
+                            status = "SUCCESS",
+                            message = "Parcels retrieved successfully",
+                            parcels = parcels
+                        )
+                    )
+                } catch (e: Exception) {
+                    val errorId = UUID.randomUUID().toString()
+
+                    ParcelLogger.logParcelRetrieval(
+                        status = "FAILED",
+                        error = e.message
+                    )
+
+                    call.respond(
+                        HttpStatusCode.InternalServerError,
+                        ParcelListResponse(
+                            status = "FAILED",
+                            message = "Failed to retrieve parcels: ${e.message}",
+                            parcels = emptyList()
+                        )
+                    )
+                }
+            }
         }
     }
 }
@@ -132,7 +178,7 @@ private fun isValidDestination(destination: String): Boolean {
     return destination.isNotBlank() && destination.length <= 100
 }
 
-// Placeholder Logger Object (you'd implement actual logging)
+// Placeholder Logger Object
 object ParcelLogger {
     fun logParcelCreation(
         parcelId: String,
@@ -142,7 +188,13 @@ object ParcelLogger {
         status: String,
         error: String? = null
     ) {
-        // Implement actual logging logic
         println("Parcel Creation Log: ID=$parcelId, Size=$size, Destination=$destination, Fragile=$isFragile, Status=$status, Error=$error")
+    }
+
+    fun logParcelRetrieval(
+        status: String,
+        error: String? = null
+    ) {
+        println("Parcel Retrieval Log: Status=$status, Error=$error")
     }
 }

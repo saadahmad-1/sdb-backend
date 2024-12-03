@@ -7,41 +7,55 @@ import io.ktor.server.routing.*
 import io.ktor.server.request.*
 import kotlinx.serialization.Serializable
 import java.util.UUID
+import com.google.cloud.firestore.Firestore
+import io.ktor.serialization.kotlinx.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
-// Firestore DeliveryBox Data Class for Storage
+// Existing data classes and enums from the original file
 @Serializable
 data class FirestoreDeliveryBoxData(
-    val boxId: String,
-    val type: BoxType,
-    val address: String,
-    val isSecured: Boolean,
+    val boxId: String = "",
+    val type: BoxType = BoxType.SMALL,
+    val address: String = "",
+    val isSecured: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
     val status: String = "CREATED"
 )
 
-// Enum for DeliveryBox Types
 enum class BoxType {
     SMALL, MEDIUM, LARGE
 }
+
+@Serializable
+data class DeliveryBoxRequest(
+    val type: BoxType,
+    val address: String,
+    val isSecured: Boolean
+)
+
+@Serializable
+data class DeliveryBoxResponse(
+    val boxId: String,
+    val status: String,
+    val message: String
+)
+
+@Serializable
+data class DeliveryBoxListResponse(
+    val status: String = "",
+    val message: String = "",
+    val deliveryBoxes: List<FirestoreDeliveryBoxData>
+)
 
 fun Application.configureDeliveryBoxRouting() {
     routing {
         route("api/v1") {
             post("create-delivery-box") {
                 try {
-                    val request = call.receiveNullable<DeliveryBoxRequest>() ?: run {
-                        call.respond(
-                            HttpStatusCode.BadRequest,
-                            DeliveryBoxResponse(
-                                boxId = UUID.randomUUID().toString(),
-                                status = "FAILED",
-                                message = "Invalid request body"
-                            )
-                        )
-                        return@post
-                    }
+                    val request = call.receive<DeliveryBoxRequest>()
 
-                    // Validate request
+                    // Validate address
                     if (!isValidAddress(request.address)) {
                         call.respond(
                             HttpStatusCode.BadRequest,
@@ -108,24 +122,47 @@ fun Application.configureDeliveryBoxRouting() {
                     )
                 }
             }
+
+            get("get-delivery-boxes") {
+                try {
+                    val firestore = FirestoreClient.getFirestore()
+                    val deliveryBoxesSnapshot = firestore.collection("delivery_boxes")
+                        .get()
+                        .get() // Wait for the operation to complete
+
+                    val deliveryBoxes = deliveryBoxesSnapshot.documents.mapNotNull { document ->
+                        document.toObject(FirestoreDeliveryBoxData::class.java)
+                    }
+
+                    call.respond(
+                        HttpStatusCode.OK,
+                        DeliveryBoxListResponse(
+                            status = "SUCCESS",
+                            message = "Delivery boxes retrieved successfully",
+                            deliveryBoxes = deliveryBoxes
+                        )
+                    )
+                } catch (e: Exception) {
+                    val errorId = UUID.randomUUID().toString()
+
+                    DeliveryBoxLogger.logDeliveryBoxRetrieval(
+                        status = "FAILED",
+                        error = e.message
+                    )
+
+                    call.respond(
+                        HttpStatusCode.InternalServerError,
+                        DeliveryBoxListResponse(
+                            status = "FAILED",
+                            message = "Failed to retrieve delivery boxes: ${e.message}",
+                            deliveryBoxes = emptyList()
+                        )
+                    )
+                }
+            }
         }
     }
 }
-
-// Request and Response Data Classes
-@Serializable
-data class DeliveryBoxRequest(
-    val type: BoxType,
-    val address: String,
-    val isSecured: Boolean
-)
-
-@Serializable
-data class DeliveryBoxResponse(
-    val boxId: String,
-    val status: String,
-    val message: String
-)
 
 // Utility function for address validation
 private fun isValidAddress(address: String): Boolean {
@@ -142,5 +179,12 @@ object DeliveryBoxLogger {
         error: String? = null
     ) {
         println("DeliveryBox Creation Log: ID=$boxId, Type=$type, Address=$address, Secured=$isSecured, Status=$status, Error=$error")
+    }
+
+    fun logDeliveryBoxRetrieval(
+        status: String,
+        error: String? = null
+    ) {
+        println("DeliveryBox Retrieval Log: Status=$status, Error=$error")
     }
 }

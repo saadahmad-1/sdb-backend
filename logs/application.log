@@ -284,3 +284,60 @@ POST https://identitytoolkit.googleapis.com/v1/projects/smart-delivery-box-9c22a
 2024-12-03 16:55:20.915 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 1045ms
 2024-12-03 16:55:28.597 [eventLoopGroupProxy-4-2] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 1479ms
 2024-12-03 16:55:37.822 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 1691ms
+2024-12-03 17:34:07.475 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 17:34:07.611 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 17:34:09.783 [main] INFO  Application - Application started in 2.478 seconds.
+2024-12-03 17:34:09.783 [main] INFO  Application - Application started: io.ktor.server.application.Application@188598ad
+2024-12-03 17:34:09.911 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 17:34:42.896 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@188598ad
+2024-12-03 17:34:42.899 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@188598ad
+2024-12-03 17:34:44.274 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 17:34:44.406 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 17:34:46.626 [main] INFO  Application - Application started in 2.517 seconds.
+2024-12-03 17:34:46.627 [main] INFO  Application - Application started: io.ktor.server.application.Application@188598ad
+2024-12-03 17:34:46.758 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 17:35:18.809 [eventLoopGroupProxy-4-2] INFO  Application - [31m500 Internal Server Error[m: [36mGET[m - /api/v1/get-delivery-boxes in 3936ms
+2024-12-03 17:36:28.494 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@188598ad
+2024-12-03 17:36:28.496 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@188598ad
+2024-12-03 17:36:30.286 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 17:36:30.413 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 17:36:32.268 [main] INFO  Application - Application started in 2.146 seconds.
+2024-12-03 17:36:32.268 [main] INFO  Application - Application started: io.ktor.server.application.Application@188598ad
+2024-12-03 17:36:32.396 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 17:36:37.436 [eventLoopGroupProxy-4-2] INFO  Application - [31m500 Internal Server Error[m: [36mGET[m - /api/v1/get-delivery-boxes in 2968ms
+2024-12-03 17:36:42.394 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@188598ad
+2024-12-03 17:36:42.395 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@188598ad
+2024-12-03 17:37:20.319 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 17:37:20.447 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 17:37:22.313 [main] INFO  Application - Application started in 2.163 seconds.
+2024-12-03 17:37:22.314 [main] INFO  Application - Application started: io.ktor.server.application.Application@188598ad
+2024-12-03 17:37:22.450 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 17:37:27.789 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mGET[m - /api/v1/get-delivery-boxes in 3189ms
+2024-12-03 17:40:34.202 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@188598ad
+2024-12-03 17:40:34.203 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@188598ad
+2024-12-03 17:40:41.933 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 17:40:42.062 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 17:40:43.964 [main] INFO  Application - Application started in 2.202 seconds.
+2024-12-03 17:40:43.965 [main] INFO  Application - Application started: io.ktor.server.application.Application@40d23c82
+2024-12-03 17:40:44.099 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 17:40:53.422 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@40d23c82
+2024-12-03 17:40:53.425 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@40d23c82
+2024-12-03 17:41:08.527 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 17:41:08.659 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 17:41:09.838 [main] INFO  Application - Application started in 1.467 seconds.
+2024-12-03 17:41:09.838 [main] INFO  Application - Application started: io.ktor.server.application.Application@40d23c82
+2024-12-03 17:41:09.964 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 17:41:15.902 [eventLoopGroupProxy-4-2] INFO  Application - [31m500 Internal Server Error[m: [36mGET[m - /api/v1/get-parcels in 2799ms
+2024-12-03 17:41:48.947 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@40d23c82
+2024-12-03 17:41:48.948 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@40d23c82
+2024-12-03 17:41:55.992 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 17:41:56.122 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 17:41:58.059 [main] INFO  Application - Application started in 2.224 seconds.
+2024-12-03 17:41:58.060 [main] INFO  Application - Application started: io.ktor.server.application.Application@40d23c82
+2024-12-03 17:41:58.190 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 17:42:03.768 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mGET[m - /api/v1/get-parcels in 2979ms
+2024-12-03 17:42:15.745 [eventLoopGroupProxy-4-1] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/create-parcel in 30ms
+2024-12-03 17:43:03.155 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/create-parcel in 2276ms
+2024-12-03 17:43:09.588 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mGET[m - /api/v1/get-parcels in 477ms
+2024-12-03 17:43:24.911 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/create-delivery-box in 581ms
+2024-12-03 17:43:45.939 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mGET[m - /api/v1/get-delivery-boxes in 361ms
