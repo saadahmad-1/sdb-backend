@@ -1,0 +1,22 @@
+2024-11-28 02:19:12.517 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@2ecf5915
+2024-11-28 02:19:12.539 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@2ecf5915
+2024-11-28 08:52:54.817 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-11-28 08:52:55.009 [main] INFO  Application - Firebase initialized successfully
+2024-11-28 08:52:58.251 [main] INFO  Application - Application started in 3.633 seconds.
+2024-11-28 08:52:58.252 [main] INFO  Application - Application started: io.ktor.server.application.Application@2ecf5915
+2024-11-28 08:52:58.657 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-11-28 08:56:02.610 [eventLoopGroupProxy-4-2] INFO  com.example.OtpLogger - OTP Generation - ID: 6f499f24-c893-401a-bfa3-1275af608795, Phone: +1234567890, ServiceProvider: provider123, Status: SUCCESS
+2024-11-28 08:56:02.610 [eventLoopGroupProxy-4-2] INFO  com.example.OtpLogger - OTP Generation - ID: 6f499f24-c893-401a-bfa3-1275af608795, Phone: +1234567890, ServiceProvider: provider123, Status: SUCCESS
+2024-11-28 08:56:04.918 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/generate-otp in 6304ms
+2024-11-28 08:56:32.215 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/delivery/status in 515ms
+2024-11-28 08:57:00.105 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mGET[m - /api/v1/delivery/status/PARCEL_123 in 559ms
+2024-11-28 08:59:53.617 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@2ecf5915
+2024-11-28 08:59:53.618 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@2ecf5915
+2024-11-28 21:17:21.063 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-11-28 21:17:21.241 [main] INFO  Application - Firebase initialized successfully
+2024-11-28 21:17:26.640 [main] INFO  Application - Application started in 5.777 seconds.
+2024-11-28 21:17:26.641 [main] INFO  Application - Application started: io.ktor.server.application.Application@2ecf5915
+2024-11-28 21:17:26.821 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-11-28 21:21:40.971 [eventLoopGroupProxy-4-1] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/create-parcel in 1201ms
+2024-11-28 21:32:23.427 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@2ecf5915
+2024-11-28 21:32:23.428 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@2ecf5915

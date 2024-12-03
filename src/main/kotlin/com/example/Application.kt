@@ -58,4 +58,5 @@ fun Application.module() {
     configureRouting()
     configureDeliveryStatusRouting()
     configureParcelRouting()
+    configureDeliveryBoxRouting()
 }

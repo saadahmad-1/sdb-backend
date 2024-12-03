@@ -1,0 +1,5 @@
+2024-11-29 10:55:11.372 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-11-29 10:55:11.720 [main] INFO  Application - Firebase initialized successfully
+2024-11-29 10:55:14.348 [main] INFO  Application - Application started in 3.375 seconds.
+2024-11-29 10:55:14.349 [main] INFO  Application - Application started: io.ktor.server.application.Application@61514735
+2024-11-29 10:55:14.680 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
