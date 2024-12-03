@@ -46,6 +46,9 @@ dependencies {
     // Test dependencies
     testImplementation("io.ktor:ktor-server-test-host-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+
+    // BCrypt for password hashing
+    implementation("org.mindrot:jbcrypt:0.4")
 }
 
 // Java compatibility

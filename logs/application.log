@@ -259,3 +259,28 @@ POST https://identitytoolkit.googleapis.com/v1/projects/smart-delivery-box-9c22a
 2024-12-03 15:49:20.731 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 1766ms
 2024-12-03 15:51:26.105 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
 2024-12-03 15:51:26.106 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
+2024-12-03 16:35:27.315 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 16:35:27.443 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 16:35:28.407 [main] INFO  Application - Application started in 1.263 seconds.
+2024-12-03 16:35:28.408 [main] INFO  Application - Application started: io.ktor.server.application.Application@590f0c50
+2024-12-03 16:35:28.531 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 16:35:55.078 [eventLoopGroupProxy-4-1] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/auth/register in 7470ms
+2024-12-03 16:36:35.743 [eventLoopGroupProxy-4-1] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/auth/register in 7138ms
+2024-12-03 16:37:18.891 [eventLoopGroupProxy-4-1] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/auth/register in 34159ms
+2024-12-03 16:37:31.394 [eventLoopGroupProxy-4-1] INFO  Application - [32m201 Created[m: [36mPOST[m - /api/v1/auth/register in 3574ms
+2024-12-03 16:37:51.786 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 1762ms
+2024-12-03 16:47:33.291 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
+2024-12-03 16:47:33.292 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
+2024-12-03 16:52:50.784 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 16:52:50.912 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 16:52:53.531 [main] INFO  Application - Application started in 2.917 seconds.
+2024-12-03 16:52:53.531 [main] INFO  Application - Application started: io.ktor.server.application.Application@39c96e48
+2024-12-03 16:52:53.659 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 16:54:05.935 [eventLoopGroupProxy-4-2] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/auth/login in 5639ms
+2024-12-03 16:54:21.545 [eventLoopGroupProxy-4-2] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/auth/login in 981ms
+2024-12-03 16:54:35.435 [eventLoopGroupProxy-4-2] INFO  Application - [31m400 Bad Request[m: [36mPOST[m - /api/v1/auth/register in 4ms
+2024-12-03 16:54:57.110 [eventLoopGroupProxy-4-2] INFO  Application - [32m201 Created[m: [36mPOST[m - /api/v1/auth/register in 3241ms
+2024-12-03 16:55:06.729 [eventLoopGroupProxy-4-2] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/auth/login in 1316ms
+2024-12-03 16:55:20.915 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 1045ms
+2024-12-03 16:55:28.597 [eventLoopGroupProxy-4-2] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 1479ms
+2024-12-03 16:55:37.822 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 1691ms
