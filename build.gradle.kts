@@ -7,8 +7,7 @@ val firebase_version: String = "9.2.0"
 plugins {
     kotlin("jvm") version "2.0.21"
     id("io.ktor.plugin") version "3.0.1"
-    kotlin("plugin.serialization") version "2.0.21"
-    // Removed explicit shadow plugin
+    kotlin("plugin.serialization") version "1.9.21"
 }
 
 group = "com.example"
@@ -36,13 +35,14 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_version")
     implementation("io.ktor:ktor-server-request-validation:$ktor_version")
     
     // Firebase dependencies
     implementation("com.google.firebase:firebase-admin:$firebase_version")
     implementation("com.google.cloud:google-cloud-firestore:3.7.3")
-    
+    implementation("io.ktor:ktor-server-auth:$ktor_version")
+
     // Test dependencies
     testImplementation("io.ktor:ktor-server-test-host-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
@@ -72,7 +72,7 @@ tasks.register("checkFirebaseServiceAccount") {
     }
 }
 
-// Optional: Ensure Firebase check runs before build
+// Ensure Firebase check runs before build
 tasks.whenTaskAdded {
     if (name == "build") {
         dependsOn("checkFirebaseServiceAccount")

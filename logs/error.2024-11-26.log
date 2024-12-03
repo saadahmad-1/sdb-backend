@@ -1,12 +1,16 @@
-2024-12-03 15:24:30.574 [eventLoopGroupProxy-4-1] ERROR Application - Unhandled: POST - /api/v1/auth/register
-java.lang.IllegalArgumentException: password must be at least 6 characters long
-	at com.google.common.base.Preconditions.checkArgument(Preconditions.java:145)
-	at com.google.firebase.auth.UserRecord.checkPassword(UserRecord.java:287)
-	at com.google.firebase.auth.UserRecord.access$000(UserRecord.java:43)
-	at com.google.firebase.auth.UserRecord$CreateRequest.setPassword(UserRecord.java:421)
-	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invokeSuspend(AuthRouting.kt:69)
-	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invoke(AuthRouting.kt)
-	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invoke(AuthRouting.kt)
+2024-11-26 19:53:02.760 [eventLoopGroupProxy-4-9] ERROR Application - Unhandled: POST - /api/v1/verify-otp
+java.lang.RuntimeException: Could not deserialize object. Class com.example.FirestoreOtpData does not define a no-argument constructor. If you are using ProGuard, make sure these constructors are not stripped
+	at com.google.cloud.firestore.CustomClassMapper.deserializeError(CustomClassMapper.java:614)
+	at com.google.cloud.firestore.CustomClassMapper.access$200(CustomClassMapper.java:53)
+	at com.google.cloud.firestore.CustomClassMapper$BeanMapper.deserialize(CustomClassMapper.java:800)
+	at com.google.cloud.firestore.CustomClassMapper$BeanMapper.deserialize(CustomClassMapper.java:792)
+	at com.google.cloud.firestore.CustomClassMapper.convertBean(CustomClassMapper.java:593)
+	at com.google.cloud.firestore.CustomClassMapper.deserializeToClass(CustomClassMapper.java:256)
+	at com.google.cloud.firestore.CustomClassMapper.convertToCustomClass(CustomClassMapper.java:100)
+	at com.google.cloud.firestore.DocumentSnapshot.toObject(DocumentSnapshot.java:189)
+	at com.example.OtpRoutingKt$configureRouting$1$1$2.invokeSuspend(OtpRouting.kt:161)
+	at com.example.OtpRoutingKt$configureRouting$1$1$2.invoke(OtpRouting.kt)
+	at com.example.OtpRoutingKt$configureRouting$1$1$2.invoke(OtpRouting.kt)
 	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invokeSuspend(RoutingNode.kt:116)
 	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invoke(RoutingNode.kt)
 	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invoke(RoutingNode.kt)
@@ -72,23 +76,19 @@ java.lang.IllegalArgumentException: password must be at least 6 characters long
 	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 	at java.base/java.lang.Thread.run(Thread.java:840)
-2024-12-03 15:26:02.530 [eventLoopGroupProxy-4-4] ERROR Application - Unhandled: POST - /api/v1/auth/register
-com.google.firebase.auth.FirebaseAuthException: The user with the provided email already exists (EMAIL_EXISTS).
-	at com.google.firebase.auth.internal.AuthErrorHandler.createException(AuthErrorHandler.java:119)
-	at com.google.firebase.auth.internal.AuthErrorHandler.createException(AuthErrorHandler.java:35)
-	at com.google.firebase.internal.AbstractHttpErrorHandler.handleHttpResponseException(AbstractHttpErrorHandler.java:57)
-	at com.google.firebase.internal.ErrorHandlingHttpClient.send(ErrorHandlingHttpClient.java:108)
-	at com.google.firebase.auth.internal.AuthHttpClient.sendRequest(AuthHttpClient.java:75)
-	at com.google.firebase.auth.internal.AuthHttpClient.sendRequest(AuthHttpClient.java:69)
-	at com.google.firebase.auth.FirebaseUserManager.post(FirebaseUserManager.java:351)
-	at com.google.firebase.auth.FirebaseUserManager.createUser(FirebaseUserManager.java:168)
-	at com.google.firebase.auth.AbstractFirebaseAuth$11.execute(AbstractFirebaseAuth.java:723)
-	at com.google.firebase.auth.AbstractFirebaseAuth$11.execute(AbstractFirebaseAuth.java:720)
-	at com.google.firebase.internal.CallableOperation.call(CallableOperation.java:36)
-	at com.google.firebase.auth.AbstractFirebaseAuth.createUser(AbstractFirebaseAuth.java:700)
-	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invokeSuspend(AuthRouting.kt:72)
-	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invoke(AuthRouting.kt)
-	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invoke(AuthRouting.kt)
+2024-11-26 19:53:32.005 [eventLoopGroupProxy-4-9] ERROR Application - Unhandled: POST - /api/v1/verify-otp
+java.lang.RuntimeException: Could not deserialize object. Class com.example.FirestoreOtpData does not define a no-argument constructor. If you are using ProGuard, make sure these constructors are not stripped
+	at com.google.cloud.firestore.CustomClassMapper.deserializeError(CustomClassMapper.java:614)
+	at com.google.cloud.firestore.CustomClassMapper.access$200(CustomClassMapper.java:53)
+	at com.google.cloud.firestore.CustomClassMapper$BeanMapper.deserialize(CustomClassMapper.java:800)
+	at com.google.cloud.firestore.CustomClassMapper$BeanMapper.deserialize(CustomClassMapper.java:792)
+	at com.google.cloud.firestore.CustomClassMapper.convertBean(CustomClassMapper.java:593)
+	at com.google.cloud.firestore.CustomClassMapper.deserializeToClass(CustomClassMapper.java:256)
+	at com.google.cloud.firestore.CustomClassMapper.convertToCustomClass(CustomClassMapper.java:100)
+	at com.google.cloud.firestore.DocumentSnapshot.toObject(DocumentSnapshot.java:189)
+	at com.example.OtpRoutingKt$configureRouting$1$1$2.invokeSuspend(OtpRouting.kt:161)
+	at com.example.OtpRoutingKt$configureRouting$1$1$2.invoke(OtpRouting.kt)
+	at com.example.OtpRoutingKt$configureRouting$1$1$2.invoke(OtpRouting.kt)
 	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invokeSuspend(RoutingNode.kt:116)
 	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invoke(RoutingNode.kt)
 	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invoke(RoutingNode.kt)
@@ -154,23 +154,3 @@ com.google.firebase.auth.FirebaseAuthException: The user with the provided email
 	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
 	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
 	at java.base/java.lang.Thread.run(Thread.java:840)
-Caused by: com.google.api.client.http.HttpResponseException: 400 Bad Request
-POST https://identitytoolkit.googleapis.com/v1/projects/smart-delivery-box-9c22a/accounts
-{
-  "error": {
-    "code": 400,
-    "message": "EMAIL_EXISTS",
-    "errors": [
-      {
-        "message": "EMAIL_EXISTS",
-        "domain": "global",
-        "reason": "invalid"
-      }
-    ]
-  }
-}
-
-	at com.google.api.client.http.HttpResponseException$Builder.build(HttpResponseException.java:293)
-	at com.google.api.client.http.HttpRequest.execute(HttpRequest.java:1118)
-	at com.google.firebase.internal.ErrorHandlingHttpClient.send(ErrorHandlingHttpClient.java:96)
-	... 76 common frames omitted

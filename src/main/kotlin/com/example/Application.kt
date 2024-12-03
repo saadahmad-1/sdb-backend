@@ -55,6 +55,7 @@ fun Application.module() {
         level = Level.INFO
     }
     
+    configureAuthRouting()
     configureRouting()
     configureDeliveryStatusRouting()
     configureParcelRouting()

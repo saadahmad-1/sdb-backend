@@ -6,3 +6,256 @@
 2024-12-03 13:57:03.909 [eventLoopGroupProxy-4-1] INFO  Application - [31m404 Not Found[m: [36mGET[m - / in 372ms
 2024-12-03 13:59:33.875 [eventLoopGroupProxy-4-4] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/create-delivery-box in 2310ms
 2024-12-03 14:00:15.832 [eventLoopGroupProxy-4-4] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/create-delivery-box in 358ms
+2024-12-03 14:01:07.361 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@28369db0
+2024-12-03 14:01:07.362 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@28369db0
+2024-12-03 15:15:33.943 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 15:15:34.069 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 15:15:35.902 [main] INFO  Application - Application started in 2.12 seconds.
+2024-12-03 15:15:35.902 [main] INFO  Application - Application started: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:15:36.026 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 15:18:49.694 [eventLoopGroupProxy-4-1] INFO  Application - [31m404 Not Found[m: [36mPOST[m - /api/v1/auth/register in 950ms
+2024-12-03 15:20:10.797 [eventLoopGroupProxy-4-4] INFO  Application - [31m404 Not Found[m: [36mPOST[m - /api/v1/auth/register in 1ms
+2024-12-03 15:20:40.387 [eventLoopGroupProxy-4-4] INFO  Application - [31m404 Not Found[m: [36mPOST[m - /api/v1/auth/register in 1ms
+2024-12-03 15:22:40.986 [eventLoopGroupProxy-4-6] INFO  Application - [31m404 Not Found[m: [36mPOST[m - /api/v1/auth/register in 0ms
+2024-12-03 15:23:58.310 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:23:58.311 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:24:13.999 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 15:24:14.126 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 15:24:15.917 [main] INFO  Application - Application started in 2.072 seconds.
+2024-12-03 15:24:15.917 [main] INFO  Application - Application started: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:24:16.041 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 15:24:30.574 [eventLoopGroupProxy-4-1] ERROR Application - Unhandled: POST - /api/v1/auth/register
+java.lang.IllegalArgumentException: password must be at least 6 characters long
+	at com.google.common.base.Preconditions.checkArgument(Preconditions.java:145)
+	at com.google.firebase.auth.UserRecord.checkPassword(UserRecord.java:287)
+	at com.google.firebase.auth.UserRecord.access$000(UserRecord.java:43)
+	at com.google.firebase.auth.UserRecord$CreateRequest.setPassword(UserRecord.java:421)
+	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invokeSuspend(AuthRouting.kt:69)
+	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invoke(AuthRouting.kt)
+	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invoke(AuthRouting.kt)
+	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invokeSuspend(RoutingNode.kt:116)
+	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invoke(RoutingNode.kt)
+	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invoke(RoutingNode.kt)
+	at io.ktor.util.pipeline.PipelineJvmKt.pipelineStartCoroutineUninterceptedOrReturn(PipelineJvm.kt:15)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:131)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:89)
+	at io.ktor.util.pipeline.SuspendFunctionGun.execute$ktor_utils(SuspendFunctionGun.kt:109)
+	at io.ktor.util.pipeline.Pipeline.execute(Pipeline.kt:86)
+	at io.ktor.server.routing.RoutingRoot$executeResult$$inlined$execute$1.invokeSuspend(Pipeline.kt:488)
+	at io.ktor.server.routing.RoutingRoot$executeResult$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.server.routing.RoutingRoot$executeResult$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.util.debug.ContextUtilsKt.initContextInDebugMode(ContextUtils.kt:17)
+	at io.ktor.server.routing.RoutingRoot.executeResult(RoutingRoot.kt:193)
+	at io.ktor.server.routing.RoutingRoot.interceptor(RoutingRoot.kt:66)
+	at io.ktor.server.routing.RoutingRoot$Plugin$install$1.invokeSuspend(RoutingRoot.kt:143)
+	at io.ktor.server.routing.RoutingRoot$Plugin$install$1.invoke(RoutingRoot.kt)
+	at io.ktor.server.routing.RoutingRoot$Plugin$install$1.invoke(RoutingRoot.kt)
+	at io.ktor.util.pipeline.PipelineJvmKt.pipelineStartCoroutineUninterceptedOrReturn(PipelineJvm.kt:15)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:131)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:89)
+	at io.ktor.server.engine.BaseApplicationEngineKt$installDefaultTransformationChecker$1.invokeSuspend(BaseApplicationEngine.kt:112)
+	at io.ktor.server.engine.BaseApplicationEngineKt$installDefaultTransformationChecker$1.invoke(BaseApplicationEngine.kt)
+	at io.ktor.server.engine.BaseApplicationEngineKt$installDefaultTransformationChecker$1.invoke(BaseApplicationEngine.kt)
+	at io.ktor.util.pipeline.PipelineJvmKt.pipelineStartCoroutineUninterceptedOrReturn(PipelineJvm.kt:15)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:131)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:89)
+	at io.ktor.util.pipeline.SuspendFunctionGun.execute$ktor_utils(SuspendFunctionGun.kt:109)
+	at io.ktor.util.pipeline.Pipeline.execute(Pipeline.kt:86)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1$invokeSuspend$$inlined$execute$1.invokeSuspend(Pipeline.kt:488)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1$invokeSuspend$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1$invokeSuspend$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.util.debug.ContextUtilsKt.initContextInDebugMode(ContextUtils.kt:17)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1.invokeSuspend(DefaultEnginePipeline.kt:123)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1.invoke(DefaultEnginePipeline.kt)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1.invoke(DefaultEnginePipeline.kt)
+	at io.ktor.util.pipeline.PipelineJvmKt.pipelineStartCoroutineUninterceptedOrReturn(PipelineJvm.kt:15)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:131)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:89)
+	at io.ktor.util.pipeline.SuspendFunctionGun.execute$ktor_utils(SuspendFunctionGun.kt:109)
+	at io.ktor.util.pipeline.Pipeline.execute(Pipeline.kt:86)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1$invokeSuspend$$inlined$execute$1.invokeSuspend(Pipeline.kt:488)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1$invokeSuspend$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1$invokeSuspend$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.util.debug.ContextUtilsKt.initContextInDebugMode(ContextUtils.kt:17)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invokeSuspend(NettyApplicationCallHandler.kt:140)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invoke(NettyApplicationCallHandler.kt)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invoke(NettyApplicationCallHandler.kt)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startCoroutineUndispatched(Undispatched.kt:20)
+	at kotlinx.coroutines.CoroutineStart.invoke(CoroutineStart.kt:360)
+	at kotlinx.coroutines.AbstractCoroutine.start(AbstractCoroutine.kt:124)
+	at kotlinx.coroutines.BuildersKt__Builders_commonKt.launch(Builders.common.kt:52)
+	at kotlinx.coroutines.BuildersKt.launch(Unknown Source)
+	at io.ktor.server.netty.NettyApplicationCallHandler.handleRequest(NettyApplicationCallHandler.kt:41)
+	at io.ktor.server.netty.NettyApplicationCallHandler.channelRead(NettyApplicationCallHandler.kt:33)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.access$600(AbstractChannelHandlerContext.java:61)
+	at io.netty.channel.AbstractChannelHandlerContext$7.run(AbstractChannelHandlerContext.java:425)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-12-03 15:24:30.913 [eventLoopGroupProxy-4-1] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/auth/register in 394ms
+2024-12-03 15:24:47.542 [eventLoopGroupProxy-4-1] INFO  Application - [32m201 Created[m: [36mPOST[m - /api/v1/auth/register in 2583ms
+2024-12-03 15:26:02.530 [eventLoopGroupProxy-4-4] ERROR Application - Unhandled: POST - /api/v1/auth/register
+com.google.firebase.auth.FirebaseAuthException: The user with the provided email already exists (EMAIL_EXISTS).
+	at com.google.firebase.auth.internal.AuthErrorHandler.createException(AuthErrorHandler.java:119)
+	at com.google.firebase.auth.internal.AuthErrorHandler.createException(AuthErrorHandler.java:35)
+	at com.google.firebase.internal.AbstractHttpErrorHandler.handleHttpResponseException(AbstractHttpErrorHandler.java:57)
+	at com.google.firebase.internal.ErrorHandlingHttpClient.send(ErrorHandlingHttpClient.java:108)
+	at com.google.firebase.auth.internal.AuthHttpClient.sendRequest(AuthHttpClient.java:75)
+	at com.google.firebase.auth.internal.AuthHttpClient.sendRequest(AuthHttpClient.java:69)
+	at com.google.firebase.auth.FirebaseUserManager.post(FirebaseUserManager.java:351)
+	at com.google.firebase.auth.FirebaseUserManager.createUser(FirebaseUserManager.java:168)
+	at com.google.firebase.auth.AbstractFirebaseAuth$11.execute(AbstractFirebaseAuth.java:723)
+	at com.google.firebase.auth.AbstractFirebaseAuth$11.execute(AbstractFirebaseAuth.java:720)
+	at com.google.firebase.internal.CallableOperation.call(CallableOperation.java:36)
+	at com.google.firebase.auth.AbstractFirebaseAuth.createUser(AbstractFirebaseAuth.java:700)
+	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invokeSuspend(AuthRouting.kt:72)
+	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invoke(AuthRouting.kt)
+	at com.example.AuthRoutingKt$configureAuthRouting$1$1$2.invoke(AuthRouting.kt)
+	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invokeSuspend(RoutingNode.kt:116)
+	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invoke(RoutingNode.kt)
+	at io.ktor.server.routing.RoutingNode$buildPipeline$1$1.invoke(RoutingNode.kt)
+	at io.ktor.util.pipeline.PipelineJvmKt.pipelineStartCoroutineUninterceptedOrReturn(PipelineJvm.kt:15)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:131)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:89)
+	at io.ktor.util.pipeline.SuspendFunctionGun.execute$ktor_utils(SuspendFunctionGun.kt:109)
+	at io.ktor.util.pipeline.Pipeline.execute(Pipeline.kt:86)
+	at io.ktor.server.routing.RoutingRoot$executeResult$$inlined$execute$1.invokeSuspend(Pipeline.kt:488)
+	at io.ktor.server.routing.RoutingRoot$executeResult$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.server.routing.RoutingRoot$executeResult$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.util.debug.ContextUtilsKt.initContextInDebugMode(ContextUtils.kt:17)
+	at io.ktor.server.routing.RoutingRoot.executeResult(RoutingRoot.kt:193)
+	at io.ktor.server.routing.RoutingRoot.interceptor(RoutingRoot.kt:66)
+	at io.ktor.server.routing.RoutingRoot$Plugin$install$1.invokeSuspend(RoutingRoot.kt:143)
+	at io.ktor.server.routing.RoutingRoot$Plugin$install$1.invoke(RoutingRoot.kt)
+	at io.ktor.server.routing.RoutingRoot$Plugin$install$1.invoke(RoutingRoot.kt)
+	at io.ktor.util.pipeline.PipelineJvmKt.pipelineStartCoroutineUninterceptedOrReturn(PipelineJvm.kt:15)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:131)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:89)
+	at io.ktor.server.engine.BaseApplicationEngineKt$installDefaultTransformationChecker$1.invokeSuspend(BaseApplicationEngine.kt:112)
+	at io.ktor.server.engine.BaseApplicationEngineKt$installDefaultTransformationChecker$1.invoke(BaseApplicationEngine.kt)
+	at io.ktor.server.engine.BaseApplicationEngineKt$installDefaultTransformationChecker$1.invoke(BaseApplicationEngine.kt)
+	at io.ktor.util.pipeline.PipelineJvmKt.pipelineStartCoroutineUninterceptedOrReturn(PipelineJvm.kt:15)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:131)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:89)
+	at io.ktor.util.pipeline.SuspendFunctionGun.execute$ktor_utils(SuspendFunctionGun.kt:109)
+	at io.ktor.util.pipeline.Pipeline.execute(Pipeline.kt:86)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1$invokeSuspend$$inlined$execute$1.invokeSuspend(Pipeline.kt:488)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1$invokeSuspend$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1$invokeSuspend$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.util.debug.ContextUtilsKt.initContextInDebugMode(ContextUtils.kt:17)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1.invokeSuspend(DefaultEnginePipeline.kt:123)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1.invoke(DefaultEnginePipeline.kt)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1.invoke(DefaultEnginePipeline.kt)
+	at io.ktor.util.pipeline.PipelineJvmKt.pipelineStartCoroutineUninterceptedOrReturn(PipelineJvm.kt:15)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:131)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:89)
+	at io.ktor.util.pipeline.SuspendFunctionGun.execute$ktor_utils(SuspendFunctionGun.kt:109)
+	at io.ktor.util.pipeline.Pipeline.execute(Pipeline.kt:86)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1$invokeSuspend$$inlined$execute$1.invokeSuspend(Pipeline.kt:488)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1$invokeSuspend$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1$invokeSuspend$$inlined$execute$1.invoke(Pipeline.kt)
+	at io.ktor.util.debug.ContextUtilsKt.initContextInDebugMode(ContextUtils.kt:17)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invokeSuspend(NettyApplicationCallHandler.kt:140)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invoke(NettyApplicationCallHandler.kt)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invoke(NettyApplicationCallHandler.kt)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startCoroutineUndispatched(Undispatched.kt:20)
+	at kotlinx.coroutines.CoroutineStart.invoke(CoroutineStart.kt:360)
+	at kotlinx.coroutines.AbstractCoroutine.start(AbstractCoroutine.kt:124)
+	at kotlinx.coroutines.BuildersKt__Builders_commonKt.launch(Builders.common.kt:52)
+	at kotlinx.coroutines.BuildersKt.launch(Unknown Source)
+	at io.ktor.server.netty.NettyApplicationCallHandler.handleRequest(NettyApplicationCallHandler.kt:41)
+	at io.ktor.server.netty.NettyApplicationCallHandler.channelRead(NettyApplicationCallHandler.kt:33)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
+	at io.netty.channel.AbstractChannelHandlerContext.access$600(AbstractChannelHandlerContext.java:61)
+	at io.netty.channel.AbstractChannelHandlerContext$7.run(AbstractChannelHandlerContext.java:425)
+	at io.netty.util.concurrent.AbstractEventExecutor.runTask(AbstractEventExecutor.java:173)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:166)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:569)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: com.google.api.client.http.HttpResponseException: 400 Bad Request
+POST https://identitytoolkit.googleapis.com/v1/projects/smart-delivery-box-9c22a/accounts
+{
+  "error": {
+    "code": 400,
+    "message": "EMAIL_EXISTS",
+    "errors": [
+      {
+        "message": "EMAIL_EXISTS",
+        "domain": "global",
+        "reason": "invalid"
+      }
+    ]
+  }
+}
+
+	at com.google.api.client.http.HttpResponseException$Builder.build(HttpResponseException.java:293)
+	at com.google.api.client.http.HttpRequest.execute(HttpRequest.java:1118)
+	at com.google.firebase.internal.ErrorHandlingHttpClient.send(ErrorHandlingHttpClient.java:96)
+	... 76 common frames omitted
+2024-12-03 15:26:02.532 [eventLoopGroupProxy-4-4] INFO  Application - [31m500 Internal Server Error[m: [36mPOST[m - /api/v1/auth/register in 677ms
+2024-12-03 15:26:17.235 [eventLoopGroupProxy-4-4] INFO  Application - [32m201 Created[m: [36mPOST[m - /api/v1/auth/register in 2148ms
+2024-12-03 15:29:27.472 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:29:27.473 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:29:33.614 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 15:29:33.748 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 15:29:35.615 [main] INFO  Application - Application started in 2.161 seconds.
+2024-12-03 15:29:35.615 [main] INFO  Application - Application started: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:29:35.737 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 15:30:07.922 [eventLoopGroupProxy-4-2] INFO  Application - [32m201 Created[m: [36mPOST[m - /api/v1/auth/register in 3397ms
+2024-12-03 15:31:37.421 [eventLoopGroupProxy-4-4] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 1063ms
+2024-12-03 15:32:06.172 [eventLoopGroupProxy-4-4] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 847ms
+2024-12-03 15:34:07.409 [eventLoopGroupProxy-4-6] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 873ms
+2024-12-03 15:35:05.477 [eventLoopGroupProxy-4-6] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 865ms
+2024-12-03 15:35:35.505 [eventLoopGroupProxy-4-6] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 858ms
+2024-12-03 15:35:40.278 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:35:40.279 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:36:19.739 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 15:36:19.866 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 15:36:21.601 [main] INFO  Application - Application started in 2.023 seconds.
+2024-12-03 15:36:21.602 [main] INFO  Application - Application started: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:36:21.727 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 15:36:37.259 [eventLoopGroupProxy-4-1] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 5260ms
+2024-12-03 15:38:57.630 [eventLoopGroupProxy-4-4] INFO  Application - [31m401 Unauthorized[m: [36mPOST[m - /api/v1/auth/login in 1707ms
+2024-12-03 15:39:04.993 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:39:04.994 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:39:13.639 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 15:39:13.769 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 15:39:15.478 [main] INFO  Application - Application started in 2.0 seconds.
+2024-12-03 15:39:15.478 [main] INFO  Application - Application started: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:39:15.602 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 15:39:24.244 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 4481ms
+2024-12-03 15:39:40.070 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 875ms
+2024-12-03 15:41:45.214 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:41:45.215 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:42:42.247 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 15:42:42.383 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 15:42:44.144 [main] INFO  Application - Application started in 2.051 seconds.
+2024-12-03 15:42:44.144 [main] INFO  Application - Application started: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:42:44.273 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 15:42:48.728 [eventLoopGroupProxy-4-2] INFO  Application - [31m400 Bad Request[m: [36mPOST[m - /api/v1/auth/login in 459ms
+2024-12-03 15:42:58.922 [eventLoopGroupProxy-4-2] INFO  Application - [31m400 Bad Request[m: [36mPOST[m - /api/v1/auth/login in 2ms
+2024-12-03 15:43:05.958 [eventLoopGroupProxy-4-2] INFO  Application - [31m400 Bad Request[m: [36mPOST[m - /api/v1/auth/login in 1ms
+2024-12-03 15:43:07.121 [eventLoopGroupProxy-4-2] INFO  Application - [31m400 Bad Request[m: [36mPOST[m - /api/v1/auth/login in 1ms
+2024-12-03 15:43:23.405 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:43:23.406 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:48:39.825 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-03 15:48:39.952 [main] INFO  Application - Firebase initialized successfully
+2024-12-03 15:48:42.338 [main] INFO  Application - Application started in 2.679 seconds.
+2024-12-03 15:48:42.338 [main] INFO  Application - Application started: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:48:42.472 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-03 15:48:51.352 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 4933ms
+2024-12-03 15:48:59.562 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 1422ms
+2024-12-03 15:49:14.148 [eventLoopGroupProxy-4-1] INFO  Application - [31m400 Bad Request[m: [36mPOST[m - /api/v1/auth/login in 4ms
+2024-12-03 15:49:20.731 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/auth/login in 1766ms
+2024-12-03 15:51:26.105 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@590f0c50
+2024-12-03 15:51:26.106 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@590f0c50
