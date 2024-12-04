@@ -8,7 +8,7 @@ import io.ktor.server.request.*
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
-// Firestore Parcel Data Class for Storage (Updated to include deliveryBoxId)
+// Firestore Parcel Data Class (Updated to include courierId)
 @Serializable
 data class FirestoreParcelData(
     val parcelId: String = "",
@@ -17,8 +17,9 @@ data class FirestoreParcelData(
     val isFragile: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
     val status: String = "CREATED",
-    val userId: String = "", // Added userId
-    val deliveryBoxId: String = "" // Added deliveryBoxId
+    val userId: String = "",
+    val deliveryBoxId: String = "",
+    val courierId: String? = null // Added courierId field
 )
 
 // Enum for Parcel Sizes
@@ -37,6 +38,8 @@ data class ParcelListResponse(
 fun Application.configureParcelRouting() {
     routing {
         route("api/v1") {
+
+            // Existing "create-parcel" route
             post("create-parcel") {
                 try {
                     val request = call.receiveNullable<ParcelRequest>() ?: run {
@@ -121,6 +124,86 @@ fun Application.configureParcelRouting() {
                 }
             }
 
+            // New route to assign courierId to a parcel
+            post("assign-courier") {
+                try {
+                    // Get parcelId and courierId from the request
+                    val request = call.receiveNullable<AssignCourierRequest>() ?: run {
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            ParcelResponse(
+                                parcelId = UUID.randomUUID().toString(),
+                                status = "FAILED",
+                                message = "Invalid request body"
+                            )
+                        )
+                        return@post
+                    }
+
+                    val parcelId = request.parcelId
+                    val courierId = request.courierId
+
+                    // Validate the request
+                    if (parcelId.isBlank() || courierId.isBlank()) {
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            ParcelResponse(
+                                parcelId = UUID.randomUUID().toString(),
+                                status = "FAILED",
+                                message = "ParcelId and CourierId cannot be blank"
+                            )
+                        )
+                        return@post
+                    }
+
+                    // Fetch the parcel from Firestore
+                    val firestore = FirestoreClient.getFirestore()
+                    val parcelDocument = firestore.collection("parcels").document(parcelId).get().get()
+
+                    if (!parcelDocument.exists()) {
+                        call.respond(
+                            HttpStatusCode.NotFound,
+                            ParcelResponse(
+                                parcelId = UUID.randomUUID().toString(),
+                                status = "FAILED",
+                                message = "Parcel not found"
+                            )
+                        )
+                        return@post
+                    }
+
+                    // Update the parcel with the courierId
+                    firestore.collection("parcels").document(parcelId).update("courierId", courierId)
+
+                    call.respond(
+                        HttpStatusCode.OK,
+                        ParcelResponse(
+                            parcelId = parcelId,
+                            status = "SUCCESS",
+                            message = "Courier assigned successfully"
+                        )
+                    )
+                } catch (e: Exception) {
+                    val errorId = UUID.randomUUID().toString()
+
+                    ParcelLogger.logParcelAssignment(
+                        parcelId = errorId,
+                        status = "FAILED",
+                        error = e.message
+                    )
+
+                    call.respond(
+                        HttpStatusCode.InternalServerError,
+                        ParcelResponse(
+                            parcelId = errorId,
+                            status = "FAILED",
+                            message = "Failed to assign courier: ${e.message}"
+                        )
+                    )
+                }
+            }
+
+            // Existing "get-parcels" route
             get("get-parcels") {
                 try {
                     val firestore = FirestoreClient.getFirestore()
@@ -162,7 +245,14 @@ fun Application.configureParcelRouting() {
     }
 }
 
-// Request and Response Data Classes (Updated to include deliveryBoxId)
+// Request Data Class for Assigning Courier
+@Serializable
+data class AssignCourierRequest(
+    val parcelId: String,
+    val courierId: String
+)
+
+// Request and Response Data Classes (Updated to include courierId)
 @Serializable
 data class ParcelRequest(
     val userId: String, // userId
@@ -184,6 +274,7 @@ private fun isValidDestination(destination: String): Boolean {
     return destination.isNotBlank() && destination.length <= 100
 }
 
+// Placeholder Logger Object
 object ParcelLogger {
     fun logParcelCreation(
         parcelId: String,
@@ -201,5 +292,13 @@ object ParcelLogger {
         error: String? = null
     ) {
         println("Parcel Retrieval Log: Status=$status, Error=$error")
+    }
+
+    fun logParcelAssignment(
+        parcelId: String,
+        status: String,
+        error: String? = null
+    ) {
+        println("Parcel Assignment Log: ParcelId=$parcelId, Status=$status, Error=$error")
     }
 }
