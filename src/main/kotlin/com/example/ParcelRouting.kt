@@ -8,7 +8,7 @@ import io.ktor.server.request.*
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
-// Firestore Parcel Data Class for Storage
+// Firestore Parcel Data Class for Storage (Updated to include userId)
 @Serializable
 data class FirestoreParcelData(
     val parcelId: String = "",
@@ -16,7 +16,8 @@ data class FirestoreParcelData(
     val destination: String = "",
     val isFragile: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
-    val status: String = "CREATED"
+    val status: String = "CREATED",
+    val userId: String = "" // New field for userId
 )
 
 // Enum for Parcel Sizes
@@ -61,23 +62,24 @@ fun Application.configureParcelRouting() {
                         )
                         return@post
                     }
-                    
+
                     val parcelId = UUID.randomUUID().toString()
-                    
+
                     // Store Parcel in Firestore
                     val firestoreParcelData = FirestoreParcelData(
                         parcelId = parcelId,
                         size = request.size,
                         destination = request.destination,
-                        isFragile = request.isFragile
+                        isFragile = request.isFragile,
+                        userId = request.userId // Storing userId with the parcel
                     )
-                    
+
                     val firestore = FirestoreClient.getFirestore()
                     firestore.collection("parcels")
                         .document(parcelId)
                         .set(firestoreParcelData)
                         .get() // Wait for the operation to complete
-                    
+
                     ParcelLogger.logParcelCreation(
                         parcelId = parcelId,
                         size = request.size,
@@ -85,7 +87,7 @@ fun Application.configureParcelRouting() {
                         isFragile = request.isFragile,
                         status = "SUCCESS"
                     )
-                    
+
                     call.respond(
                         HttpStatusCode.OK,
                         ParcelResponse(
@@ -96,7 +98,7 @@ fun Application.configureParcelRouting() {
                     )
                 } catch (e: Exception) {
                     val errorId = UUID.randomUUID().toString()
-                    
+
                     ParcelLogger.logParcelCreation(
                         parcelId = errorId,
                         size = null,
@@ -105,7 +107,7 @@ fun Application.configureParcelRouting() {
                         status = "FAILED",
                         error = e.message
                     )
-                    
+
                     call.respond(
                         HttpStatusCode.InternalServerError,
                         ParcelResponse(
@@ -133,7 +135,7 @@ fun Application.configureParcelRouting() {
                         ParcelListResponse(
                             status = "SUCCESS",
                             message = "Parcels retrieved successfully",
-                            parcels = parcels
+                            parcels = parcels // Return all parcels with userId included
                         )
                     )
                 } catch (e: Exception) {
@@ -161,6 +163,7 @@ fun Application.configureParcelRouting() {
 // Request and Response Data Classes
 @Serializable
 data class ParcelRequest(
+    val userId: String, // New field for userId
     val size: ParcelSize,
     val destination: String,
     val isFragile: Boolean
