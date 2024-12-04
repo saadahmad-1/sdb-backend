@@ -8,10 +8,10 @@ import java.util.UUID
 @Serializable
 data class OtpLogEntry(
     val id: String = UUID.randomUUID().toString(),
-    val otpId: String,
-    val phoneNumber: String,
-    val serviceProviderId: String,
-    val status: String,
+    val otpId: String = "",
+    val phoneNumber: String = "",
+    val serviceProviderId: String = "",
+    val status: String = "",
     val error: String? = null,
     val timestamp: Long = System.currentTimeMillis(),
     val logType: String = "OTP_GENERATION"

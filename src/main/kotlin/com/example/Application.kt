@@ -56,7 +56,7 @@ fun Application.module() {
     }
     
     configureAuthRouting()
-    configureRouting()
+    configureOtpRouting()
     configureDeliveryStatusRouting()
     configureParcelRouting()
     configureDeliveryBoxRouting()
