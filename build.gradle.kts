@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm") version "2.0.0-RC1"
     id("io.ktor.plugin") version "3.0.2"  // Updated Ktor plugin version
     kotlin("plugin.serialization") version "2.0.0-RC1"
+    "com.google.gms.google-services"
 }
 
 group = "com.example"
