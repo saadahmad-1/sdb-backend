@@ -8,7 +8,7 @@ WORKDIR /app
 COPY . .
 
 # Build the application
-RUN gradle build --no-daemon
+RUN ./gradlew build
 
 # Use slim JDK for runtime
 FROM openjdk:17-slim
