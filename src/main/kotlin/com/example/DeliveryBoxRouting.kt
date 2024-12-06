@@ -12,12 +12,19 @@ import io.ktor.serialization.kotlinx.*
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-// Existing data classes and enums from the original file
+// Updated data classes to include location
+@Serializable
+data class Location(
+    val latitude: Double,
+    val longitude: Double
+)
+
 @Serializable
 data class FirestoreDeliveryBoxData(
     val boxId: String = "",
     val type: BoxType = BoxType.SMALL,
     val address: String = "",
+    val location: Location? = null,
     val isSecured: Boolean = false,
     val createdAt: Long = System.currentTimeMillis(),
     val status: String = "CREATED"
@@ -31,6 +38,7 @@ enum class BoxType {
 data class DeliveryBoxRequest(
     val type: BoxType,
     val address: String,
+    val location: Location? = null,
     val isSecured: Boolean
 )
 
@@ -55,7 +63,7 @@ fun Application.configureDeliveryBoxRouting() {
                 try {
                     val request = call.receive<DeliveryBoxRequest>()
 
-                    // Validate address
+                    // Validate address and location
                     if (!isValidAddress(request.address)) {
                         call.respond(
                             HttpStatusCode.BadRequest,
@@ -68,6 +76,19 @@ fun Application.configureDeliveryBoxRouting() {
                         return@post
                     }
 
+                    // Validate location if provided
+                    if (request.location != null && !isValidLocation(request.location)) {
+                        call.respond(
+                            HttpStatusCode.BadRequest,
+                            DeliveryBoxResponse(
+                                boxId = UUID.randomUUID().toString(),
+                                status = "FAILED",
+                                message = "Invalid location coordinates"
+                            )
+                        )
+                        return@post
+                    }
+
                     val boxId = UUID.randomUUID().toString()
 
                     // Store DeliveryBox in Firestore
@@ -75,6 +96,7 @@ fun Application.configureDeliveryBoxRouting() {
                         boxId = boxId,
                         type = request.type,
                         address = request.address,
+                        location = request.location,
                         isSecured = request.isSecured
                     )
 
@@ -88,6 +110,7 @@ fun Application.configureDeliveryBoxRouting() {
                         boxId = boxId,
                         type = request.type,
                         address = request.address,
+                        location = request.location,
                         isSecured = request.isSecured,
                         status = "SUCCESS"
                     )
@@ -107,6 +130,7 @@ fun Application.configureDeliveryBoxRouting() {
                         boxId = errorId,
                         type = null,
                         address = "UNKNOWN",
+                        location = null,
                         isSecured = false,
                         status = "FAILED",
                         error = e.message
@@ -164,9 +188,14 @@ fun Application.configureDeliveryBoxRouting() {
     }
 }
 
-// Utility function for address validation
+// Utility functions for validation
 private fun isValidAddress(address: String): Boolean {
     return address.isNotBlank() && address.length <= 200
+}
+
+private fun isValidLocation(location: Location): Boolean {
+    return location.latitude in -90.0..90.0 && 
+           location.longitude in -180.0..180.0
 }
 
 object DeliveryBoxLogger {
@@ -174,11 +203,19 @@ object DeliveryBoxLogger {
         boxId: String,
         type: BoxType?,
         address: String,
+        location: Location?,
         isSecured: Boolean,
         status: String,
         error: String? = null
     ) {
-        println("DeliveryBox Creation Log: ID=$boxId, Type=$type, Address=$address, Secured=$isSecured, Status=$status, Error=$error")
+        println("DeliveryBox Creation Log: " +
+            "ID=$boxId, " +
+            "Type=$type, " +
+            "Address=$address, " +
+            "Location=${location?.let { "(${it.latitude}, ${it.longitude})" } ?: "N/A"}, " +
+            "Secured=$isSecured, " +
+            "Status=$status, " +
+            "Error=$error")
     }
 
     fun logDeliveryBoxRetrieval(

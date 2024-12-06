@@ -1,0 +1,3 @@
+2024-12-04 15:02:58.965 [eventLoopGroupProxy-4-2] ERROR com.example.OtpLogger - OTP Generation - ID: cfcd5173-7c00-4068-b966-8a408e5f8e16, Phone: +1234567890, ServiceProvider: service-provider-123, Status: CREATED
+2024-12-04 15:03:51.220 [eventLoopGroupProxy-4-2] ERROR com.example.OtpLogger - OTP Generation - ID: cfcd5173-7c00-4068-b966-8a408e5f8e16, Phone: +1234567890, ServiceProvider: service-provider-123, Status: UPDATED
+2024-12-04 15:04:04.616 [eventLoopGroupProxy-4-2] ERROR com.example.OtpLogger - OTP Generation - ID: cfcd5173-7c00-4068-b966-8a408e5f8e16, Phone: +1234567890, ServiceProvider: service-provider-123, Status: UPDATED
