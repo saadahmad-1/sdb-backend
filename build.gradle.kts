@@ -1,12 +1,12 @@
-val ktor_version: String by project
-val kotlin_version: String by project
-val logback_version: String by project
-val kotlinx_serialization_version: String by project
-val firebase_version: String = "9.2.0"
+val ktor_version: String = "2.3.7"
+val kotlin_version: String = "1.9.21"
+val logback_version: String = "1.4.14"
+val kotlinx_serialization_version: String = "1.6.2"
+val firebase_version: String = "8.2.0"
 
 plugins {
-    kotlin("jvm") version "2.0.21"
-    id("io.ktor.plugin") version "3.0.1"
+    kotlin("jvm") version "1.9.21"
+    id("io.ktor.plugin") version "2.3.7"
     kotlin("plugin.serialization") version "1.9.21"
 }
 
@@ -26,6 +26,9 @@ repositories {
 }
 
 dependencies {
+    // Explicit Kotlin stdlib
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
+
     // Ktor dependencies
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
@@ -61,6 +64,20 @@ java {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         jvmTarget = "17"
+        freeCompilerArgs = listOf(
+            "-Xjvm-default=all",
+            "-opt-in=kotlin.RequiresOptIn"
+        )
+    }
+}
+
+// Diagnostic task to print versions
+tasks.register("printVersions") {
+    doLast {
+        println("Kotlin Version: $kotlin_version")
+        println("Ktor Version: $ktor_version")
+        println("Serialization Version: $kotlinx_serialization_version")
+        println("Firebase Version: $firebase_version")
     }
 }
 
