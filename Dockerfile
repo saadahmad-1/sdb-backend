@@ -7,8 +7,11 @@ WORKDIR /app
 # Copy project files
 COPY . .
 
-# Build the application
-RUN ./gradlew build
+# Ensure gradlew is executable
+RUN chmod +x ./gradlew
+
+# Build the application with additional flags
+RUN ./gradlew build --no-daemon --info
 
 # Use slim JDK for runtime
 FROM openjdk:17-slim
