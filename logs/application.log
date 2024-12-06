@@ -30,3 +30,36 @@ java.lang.IllegalStateException: Firebase credentials are missing
 2024-12-07 03:19:20.477 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
 2024-12-07 03:19:28.254 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@221a2068
 2024-12-07 03:19:28.257 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@221a2068
+2024-12-07 03:39:54.210 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-07 03:39:54.283 [main] INFO  FirebaseCredentials - Using credentials from classpath
+2024-12-07 03:39:54.284 [main] INFO  FirebaseCredentials - Using credentials from file: src/main/resources/firebase-service-account.json
+2024-12-07 03:39:54.284 [main] ERROR Application - Firebase service account file not found!
+2024-12-07 03:39:54.285 [main] ERROR Application - Critical error initializing Firebase: Firebase credentials are missing
+java.lang.IllegalStateException: Firebase credentials are missing
+	at com.example.ApplicationKt.initializeFirebase(Application.kt:33)
+	at com.example.ApplicationKt.module(Application.kt:87)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at kotlin.reflect.jvm.internal.calls.CallerImpl$Method.callMethod(CallerImpl.kt:97)
+	at kotlin.reflect.jvm.internal.calls.CallerImpl$Method$Static.call(CallerImpl.kt:106)
+	at kotlin.reflect.jvm.internal.KCallableImpl.callDefaultMethod$kotlin_reflection(KCallableImpl.kt:207)
+	at kotlin.reflect.jvm.internal.KCallableImpl.callBy(KCallableImpl.kt:112)
+	at io.ktor.server.engine.internal.CallableUtilsKt.callFunctionWithInjection(CallableUtils.kt:120)
+	at io.ktor.server.engine.internal.CallableUtilsKt.executeModuleFunction(CallableUtils.kt:36)
+	at io.ktor.server.engine.EmbeddedServer.launchModuleByName$lambda$26(EmbeddedServerJvm.kt:354)
+	at io.ktor.server.engine.EmbeddedServer.avoidingDoubleStartupFor(EmbeddedServerJvm.kt:378)
+	at io.ktor.server.engine.EmbeddedServer.launchModuleByName(EmbeddedServerJvm.kt:353)
+	at io.ktor.server.engine.EmbeddedServer.instantiateAndConfigureApplication$lambda$25(EmbeddedServerJvm.kt:334)
+	at io.ktor.server.engine.EmbeddedServer.avoidingDoubleStartup(EmbeddedServerJvm.kt:360)
+	at io.ktor.server.engine.EmbeddedServer.instantiateAndConfigureApplication(EmbeddedServerJvm.kt:332)
+	at io.ktor.server.engine.EmbeddedServer.createApplication(EmbeddedServerJvm.kt:142)
+	at io.ktor.server.engine.EmbeddedServer.start(EmbeddedServerJvm.kt:271)
+	at io.ktor.server.netty.EngineMain.main(EngineMain.kt:25)
+2024-12-07 03:39:56.041 [main] INFO  Application - Application started in 2.028 seconds.
+2024-12-07 03:39:56.042 [main] INFO  Application - Application started: io.ktor.server.application.Application@3976ebfa
+2024-12-07 03:39:56.162 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-07 03:40:38.867 [eventLoopGroupProxy-4-1] INFO  Application - [32m200 OK[m: [36mGET[m - /api/v1/get-delivery-boxes in 3168ms
+2024-12-07 03:40:56.569 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@3976ebfa
+2024-12-07 03:40:56.570 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@3976ebfa

@@ -15,8 +15,8 @@ import kotlinx.serialization.json.Json
 // Updated data classes to include location
 @Serializable
 data class Location(
-    val latitude: Double,
-    val longitude: Double
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0
 )
 
 @Serializable
