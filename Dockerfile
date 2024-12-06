@@ -19,12 +19,18 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 # Set working directory
 WORKDIR /app
 
-# Copy built jar and service account key
+# Copy built jar
 COPY --from=builder /app/build/libs/*.jar app.jar
-COPY src/main/resources/firebase-service-account.json /app/firebase-service-account.json
+
+# Use build argument for Firebase credentials
+ARG FIREBASE_SERVICE_ACCOUNT_JSON
+
+# Create resources directory and write Firebase credentials
+RUN mkdir -p /app/src/main/resources
+RUN echo "$FIREBASE_SERVICE_ACCOUNT_JSON" > /app/src/main/resources/firebase-service-account.json
 
 # Set environment variables for Docker
-ENV FIREBASE_CREDENTIALS_PATH=/app/firebase-service-account.json
+ENV FIREBASE_CREDENTIALS_PATH=/app/src/main/resources/firebase-service-account.json
 ENV PORT=8080
 ENV KTOR_ENV=production
 
