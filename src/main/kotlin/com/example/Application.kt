@@ -8,6 +8,9 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.defaultheaders.*
+import io.ktor.server.routing.*
+import io.ktor.server.response.*
+import io.ktor.server.request.*
 import kotlinx.serialization.json.Json
 import org.slf4j.LoggerFactory
 import org.slf4j.event.Level
@@ -35,14 +38,12 @@ fun Application.initializeFirebase() {
             .build()
 
         // Prevent multiple initializations
-        if (FirebaseApp.getInstances().isEmpty()) {
+        if (FirebaseApp.getApps().isEmpty()) {
             FirebaseApp.initializeApp(options)
             logger.info("Firebase initialized successfully")
         }
     } catch (e: Exception) {
         logger.error("Critical error initializing Firebase: ${e.message}", e)
-        // Optionally rethrow to prevent application startup
-        // throw RuntimeException("Firebase initialization failed", e)
     }
 }
 
@@ -104,25 +105,25 @@ fun Application.module() {
     // Enhanced Call Logging
     install(CallLogging) {
         level = Level.INFO
-        // Optionally filter or format logs
-        // filter { call -> call.request.path() != "/health" }
     }
-    
-    // Route configurations
-    configureAuthRouting()
-    configureOtpRouting()
-    configureDeliveryStatusRouting()
-    configureParcelRouting()
-    configureDeliveryBoxRouting()
-    configureUserRouting()
 
-    // Optional: Add a health check endpoint
+    // Correct way to configure Routing
     routing {
-        get("/health") {
-            call.respond(mapOf(
-                "status" to "healthy", 
-                "firebase" to (FirebaseApp.getInstances().isNotEmpty())
-            ))
+        configureAuthRouting()
+        configureOtpRouting()
+        configureDeliveryStatusRouting()
+        configureParcelRouting()
+        configureDeliveryBoxRouting()
+        configureUserRouting()
+
+        // Optional: Add a health check endpoint
+        route("/health") {
+            get {
+                call.respond(mapOf(
+                    "status" to "healthy", 
+                    "firebase" to (FirebaseApp.getApps().isNotEmpty())
+                ))
+            }
         }
     }
 }

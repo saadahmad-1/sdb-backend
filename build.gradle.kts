@@ -1,13 +1,13 @@
-val ktor_version: String = "2.3.7"
-val kotlin_version: String = "1.9.21"
+val ktor_version: String = "3.0.2"  // Ktor 3.0.2
+val kotlin_version: String = "2.0.0-RC1" // Update to 2.0.0-RC1 or later
 val logback_version: String = "1.4.14"
 val kotlinx_serialization_version: String = "1.6.2"
 val firebase_version: String = "8.2.0"
 
 plugins {
-    kotlin("jvm") version "1.9.21"
-    id("io.ktor.plugin") version "2.3.7"
-    kotlin("plugin.serialization") version "1.9.21"
+    kotlin("jvm") version "2.0.0-RC1"
+    id("io.ktor.plugin") version "3.0.2"  // Updated Ktor plugin version
+    kotlin("plugin.serialization") version "2.0.0-RC1"
 }
 
 group = "com.example"
@@ -30,7 +30,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
 
     // Ktor dependencies
-    implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-core-jvm:$ktor_version")  // This includes routing
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-default-headers-jvm:$ktor_version")
@@ -40,18 +40,18 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_version")
     implementation("io.ktor:ktor-server-request-validation:$ktor_version")
-    
+    implementation("io.ktor:ktor-server-auth:$ktor_version")
+
     // Firebase dependencies
     implementation("com.google.firebase:firebase-admin:$firebase_version")
     implementation("com.google.cloud:google-cloud-firestore:3.7.3")
-    implementation("io.ktor:ktor-server-auth:$ktor_version")
+
+    // BCrypt for password hashing
+    implementation("org.mindrot:jbcrypt:0.4")
 
     // Test dependencies
     testImplementation("io.ktor:ktor-server-test-host-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-
-    // BCrypt for password hashing
-    implementation("org.mindrot:jbcrypt:0.4")
 }
 
 // Java compatibility

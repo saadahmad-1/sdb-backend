@@ -142,3 +142,10 @@
 2024-12-04 15:29:44.259 [eventLoopGroupProxy-4-2] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/assign-courier in 738ms
 2024-12-04 15:31:13.881 [eventLoopGroupProxy-4-3] INFO  Application - [32m200 OK[m: [36mPOST[m - /api/v1/create-parcel in 1473ms
 2024-12-04 15:31:22.661 [eventLoopGroupProxy-4-3] INFO  Application - [32m200 OK[m: [36mGET[m - /api/v1/get-parcels in 1564ms
+2024-12-06 18:40:43.317 [main] INFO  Application - Autoreload is disabled because the development mode is off.
+2024-12-06 18:40:43.450 [main] INFO  Application - Firebase initialized successfully
+2024-12-06 18:40:45.937 [main] INFO  Application - Application started in 2.781 seconds.
+2024-12-06 18:40:45.938 [main] INFO  Application - Application started: io.ktor.server.application.Application@3a1706e1
+2024-12-06 18:40:46.069 [DefaultDispatcher-worker-1] INFO  Application - Responding at http://0.0.0.0:8080
+2024-12-06 18:40:53.195 [KtorShutdownHook] INFO  Application - Application stopping: io.ktor.server.application.Application@3a1706e1
+2024-12-06 18:40:53.196 [KtorShutdownHook] INFO  Application - Application stopped: io.ktor.server.application.Application@3a1706e1
