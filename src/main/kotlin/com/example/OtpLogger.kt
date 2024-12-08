@@ -9,8 +9,8 @@ import java.util.UUID
 data class OtpLogEntry(
     val id: String = UUID.randomUUID().toString(),
     val otpId: String = "",
-    val phoneNumber: String = "",
-    val serviceProviderId: String = "",
+    val email: String = "",
+    val parcelId: String = "",
     val status: String = "",
     val error: String? = null,
     val timestamp: Long = System.currentTimeMillis(),
@@ -22,16 +22,16 @@ object OtpLogger {
     
     fun logOtpGeneration(
         otpId: String,
-        phoneNumber: String,
-        serviceProviderId: String,
+        email: String,
+        parcelId: String,
         status: String,
         error: String? = null
     ) {
         // Create log entry
         val logEntry = OtpLogEntry(
             otpId = otpId,
-            phoneNumber = phoneNumber,
-            serviceProviderId = serviceProviderId,
+            email = email,
+            parcelId = parcelId,
             status = status,
             error = error
         )
@@ -40,8 +40,8 @@ object OtpLogger {
         val logMessage = buildString {
             append("OTP Generation - ")
             append("ID: $otpId, ")
-            append("Phone: $phoneNumber, ")
-            append("ServiceProvider: $serviceProviderId, ")
+            append("Email: $email, ")
+            append("ParcelId: $parcelId, ")
             append("Status: $status")
             if (error != null) {
                 append(", Error: $error")
@@ -70,16 +70,16 @@ object OtpLogger {
     // Additional logging methods for OTP verification
     fun logOtpVerification(
         otpId: String,
-        phoneNumber: String,
-        serviceProviderId: String,
+        email: String,
+        parcelId: String,
         status: String,
         error: String? = null
     ) {
         // Create log entry for verification
         val logEntry = OtpLogEntry(
             otpId = otpId,
-            phoneNumber = phoneNumber,
-            serviceProviderId = serviceProviderId,
+            email = email,
+            parcelId = parcelId,
             status = status,
             error = error,
             logType = "OTP_VERIFICATION"
@@ -89,8 +89,8 @@ object OtpLogger {
         val logMessage = buildString {
             append("OTP Verification - ")
             append("ID: $otpId, ")
-            append("Phone: $phoneNumber, ")
-            append("ServiceProvider: $serviceProviderId, ")
+            append("Email: $email, ")
+            append("ParcelId: $parcelId, ")
             append("Status: $status")
             if (error != null) {
                 append(", Error: $error")

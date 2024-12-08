@@ -12,12 +12,11 @@ import kotlinx.serialization.Serializable
 import java.io.FileInputStream
 import java.util.UUID
 
-// Firestore OTP Data Class for Storage
 @Serializable
 data class FirestoreOtpData(
     val otpId: String = "",
-    val phoneNumber: String = "",
-    val serviceProviderId: String = "",
+    val email: String = "",
+    val parcelId: String = "",
     val otp: String = "",
     val createdAt: Long = System.currentTimeMillis(),
     val expiresAt: Long = System.currentTimeMillis() + 600000, // 10 minutes expiry
@@ -26,7 +25,7 @@ data class FirestoreOtpData(
 
 @Serializable
 data class OtpVerificationRequest(
-    val phoneNumber: String,
+    val email: String,
     val otp: String
 )
 
@@ -51,7 +50,6 @@ fun Application.configureOtpRouting() {
 
     routing {
         route("api/v1") {
-            // Generate OTP
             post("generate-otp") {
                 try {
                     val request = call.receiveNullable<OtpRequest>() ?: run {
@@ -66,25 +64,14 @@ fun Application.configureOtpRouting() {
                         return@post
                     }
             
-                    if (!isValidPhoneNumber(request.phoneNumber)) {
-                        call.respond(
-                            HttpStatusCode.BadRequest,
-                            OtpResponse(
-                                otpId = UUID.randomUUID().toString(),
-                                status = "FAILED",
-                                message = "Invalid phone number format"
-                            )
-                        )
-                        return@post
-                    }
-            
                     val firestore = FirestoreClient.getFirestore()
             
-                    // Check if an OTP already exists for this phone number
+                    // Check if an OTP already exists for this email and parcelId
                     val existingOtpQuery = firestore.collection("otps")
-                        .whereEqualTo("phoneNumber", request.phoneNumber)
+                        .whereEqualTo("email", request.email)
+                        .whereEqualTo("parcelId", request.parcelId)
                         .get()
-                        .get() // Wait for the operation to complete
+                        .get()
             
                     val otp = (100000..999999).random().toString()
                     val otpId = UUID.randomUUID().toString()
@@ -102,12 +89,12 @@ fun Application.configureOtpRouting() {
                                     "status" to "PENDING"
                                 )
                             )
-                            .get() // Wait for the operation to complete
+                            .get()
             
                         OtpLogger.logOtpGeneration(
                             otpId = existingDoc.id,
-                            phoneNumber = request.phoneNumber,
-                            serviceProviderId = request.serviceProviderId,
+                            email = request.email,
+                            parcelId = request.parcelId,
                             status = "UPDATED"
                         )
             
@@ -123,19 +110,19 @@ fun Application.configureOtpRouting() {
                         // Create a new OTP entry
                         val firestoreOtpData = FirestoreOtpData(
                             otpId = otpId,
-                            phoneNumber = request.phoneNumber,
-                            serviceProviderId = request.serviceProviderId,
+                            email = request.email,
+                            parcelId = request.parcelId,
                             otp = otp
                         )
                         firestore.collection("otps")
                             .document(otpId)
                             .set(firestoreOtpData)
-                            .get() // Wait for the operation to complete
+                            .get()
             
                         OtpLogger.logOtpGeneration(
                             otpId = otpId,
-                            phoneNumber = request.phoneNumber,
-                            serviceProviderId = request.serviceProviderId,
+                            email = request.email,
+                            parcelId = request.parcelId,
                             status = "CREATED"
                         )
             
@@ -153,8 +140,8 @@ fun Application.configureOtpRouting() {
             
                     OtpLogger.logOtpGeneration(
                         otpId = errorId,
-                        phoneNumber = "UNKNOWN",
-                        serviceProviderId = "UNKNOWN",
+                        email = "UNKNOWN",
+                        parcelId = "UNKNOWN",
                         status = "FAILED",
                         error = e.message
                     )
@@ -169,7 +156,7 @@ fun Application.configureOtpRouting() {
                     )
                 }
             }
-            
+                        
             // Fetch all OTP logs
             get("otp-logs") {
                 try {
@@ -189,7 +176,6 @@ fun Application.configureOtpRouting() {
                 }
             }
 
-            // Verify OTP
             post("verify-otp") {
                 try {
                     val request = call.receiveNullable<OtpVerificationRequest>() ?: run {
@@ -206,10 +192,10 @@ fun Application.configureOtpRouting() {
             
                     val firestore = FirestoreClient.getFirestore()
                     val querySnapshot = firestore.collection("otps")
-                        .whereEqualTo("phoneNumber", request.phoneNumber)
+                        .whereEqualTo("email", request.email)
                         .whereEqualTo("otp", request.otp)
                         .get()
-                        .get() // Wait for the operation to complete
+                        .get()
             
                     if (querySnapshot.documents.isEmpty()) {
                         call.respond(
@@ -234,8 +220,8 @@ fun Application.configureOtpRouting() {
             
                         OtpLogger.logOtpVerification(
                             otpId = otpData.otpId,
-                            phoneNumber = otpData.phoneNumber,
-                            serviceProviderId = otpData.serviceProviderId,
+                            email = otpData.email,
+                            parcelId = otpData.parcelId,
                             status = "SUCCESS"
                         )
             
@@ -267,15 +253,15 @@ fun Application.configureOtpRouting() {
                         )
                     )
                 }
-            }                     
+            }                                 
         }
     }
 }
 
 @Serializable
 data class OtpRequest(
-    val phoneNumber: String,
-    val serviceProviderId: String
+    val email: String,
+    val parcelId: String
 )
 
 @Serializable

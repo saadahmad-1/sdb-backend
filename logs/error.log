@@ -1,5 +1,5 @@
-2024-12-07 03:19:18.019 [main] ERROR Application - Firebase service account file not found!
-2024-12-07 03:19:18.020 [main] ERROR Application - Critical error initializing Firebase: Firebase credentials are missing
+2024-12-08 15:51:28.070 [main] ERROR Application - Firebase service account file not found!
+2024-12-08 15:51:28.071 [main] ERROR Application - Critical error initializing Firebase: Firebase credentials are missing
 java.lang.IllegalStateException: Firebase credentials are missing
 	at com.example.ApplicationKt.initializeFirebase(Application.kt:33)
 	at com.example.ApplicationKt.module(Application.kt:87)
@@ -22,27 +22,5 @@ java.lang.IllegalStateException: Firebase credentials are missing
 	at io.ktor.server.engine.EmbeddedServer.createApplication(EmbeddedServerJvm.kt:142)
 	at io.ktor.server.engine.EmbeddedServer.start(EmbeddedServerJvm.kt:271)
 	at io.ktor.server.netty.EngineMain.main(EngineMain.kt:25)
-2024-12-07 03:39:54.284 [main] ERROR Application - Firebase service account file not found!
-2024-12-07 03:39:54.285 [main] ERROR Application - Critical error initializing Firebase: Firebase credentials are missing
-java.lang.IllegalStateException: Firebase credentials are missing
-	at com.example.ApplicationKt.initializeFirebase(Application.kt:33)
-	at com.example.ApplicationKt.module(Application.kt:87)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at kotlin.reflect.jvm.internal.calls.CallerImpl$Method.callMethod(CallerImpl.kt:97)
-	at kotlin.reflect.jvm.internal.calls.CallerImpl$Method$Static.call(CallerImpl.kt:106)
-	at kotlin.reflect.jvm.internal.KCallableImpl.callDefaultMethod$kotlin_reflection(KCallableImpl.kt:207)
-	at kotlin.reflect.jvm.internal.KCallableImpl.callBy(KCallableImpl.kt:112)
-	at io.ktor.server.engine.internal.CallableUtilsKt.callFunctionWithInjection(CallableUtils.kt:120)
-	at io.ktor.server.engine.internal.CallableUtilsKt.executeModuleFunction(CallableUtils.kt:36)
-	at io.ktor.server.engine.EmbeddedServer.launchModuleByName$lambda$26(EmbeddedServerJvm.kt:354)
-	at io.ktor.server.engine.EmbeddedServer.avoidingDoubleStartupFor(EmbeddedServerJvm.kt:378)
-	at io.ktor.server.engine.EmbeddedServer.launchModuleByName(EmbeddedServerJvm.kt:353)
-	at io.ktor.server.engine.EmbeddedServer.instantiateAndConfigureApplication$lambda$25(EmbeddedServerJvm.kt:334)
-	at io.ktor.server.engine.EmbeddedServer.avoidingDoubleStartup(EmbeddedServerJvm.kt:360)
-	at io.ktor.server.engine.EmbeddedServer.instantiateAndConfigureApplication(EmbeddedServerJvm.kt:332)
-	at io.ktor.server.engine.EmbeddedServer.createApplication(EmbeddedServerJvm.kt:142)
-	at io.ktor.server.engine.EmbeddedServer.start(EmbeddedServerJvm.kt:271)
-	at io.ktor.server.netty.EngineMain.main(EngineMain.kt:25)
+2024-12-08 15:53:09.900 [eventLoopGroupProxy-4-2] ERROR com.example.OtpLogger - OTP Generation - ID: 7a9bfa95-2868-45ee-840d-0cb6c8e06619, Email: customer@email.com, ParcelId: C1D2E3, Status: CREATED
+2024-12-08 15:53:28.253 [eventLoopGroupProxy-4-2] ERROR com.example.OtpLogger - OTP Generation - ID: 7a9bfa95-2868-45ee-840d-0cb6c8e06619, Email: customer@email.com, ParcelId: C1D2E3, Status: UPDATED
